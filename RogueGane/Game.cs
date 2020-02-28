@@ -36,12 +36,15 @@ namespace RogueGame
         private static readonly int _inventoryHeight = 11;
         private static RLConsole _inventoryConsole;
 
+        public static Player Player { get; private set; }
         public static DungeonMap DungeonMap { get; private set; }
 
         static void Main(string[] args)
         {
+            Player = new Player();
             MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
             DungeonMap = mapGenerator.CreateMap();
+            DungeonMap.UpdatePlayerFov();
             // This must be the exact name of the bitmap font file we are using or it will error.
             string fontFileName = "terminal8x8.png";
             // The title will appear at the top of the console window
@@ -92,7 +95,7 @@ namespace RogueGame
             RLConsole.Blit(_inventoryConsole, 0, 0, _inventoryWidth, _inventoryHeight,
               _rootConsole, 0, 0);
 
-
+            Player.Draw(_mapConsole, DungeonMap);
             // Tell RLNET to draw the console that we set
             _rootConsole.Draw();
         }

@@ -16,5 +16,6 @@ namespace RogueGame.Core
         public static RLColor WallFov = Palette.SecondaryLighter;
 
         public static RLColor TextHeading = Palette.DbLight;
+        public static RLColor Player = Palette.DbLight;
     }
 }

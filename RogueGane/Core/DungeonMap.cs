@@ -49,7 +49,20 @@ namespace RogueGame.Core
                     mapConsole.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
                 }
             }
+        }
 
+        public void UpdatePlayerFov()
+        {
+            Player player = Game.Player;
+            // compute fov based on player's location and awareness
+            ComputeFov(player.X, player.Y, player.Awareness, true);
+            foreach(Cell cell in GetAllCells())
+            {
+                if(IsInFov(cell.X, cell.Y))
+                {
+                    SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
+                }
+            }
         }
     }
 }
